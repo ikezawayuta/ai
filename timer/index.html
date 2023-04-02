@@ -1,0 +1,48 @@
+<div>
+  <h1 id="timer">00:00:00</h1>
+  <input type="number" id="hours" placeholder="Hours">
+  <input type="number" id="minutes" placeholder="Minutes">
+  <input type="number" id="seconds" placeholder="Seconds">
+  <button onclick="startTimer()">Start</button>
+  <button onclick="stopTimer()">Stop</button>
+  <button onclick="resetTimer()">Reset</button>
+</div>
+<script type="text/javascript">
+// var timer;
+var remainingTime = 0;
+var endTime;
+var isRunning = false;
+
+function startTimer() {
+  if (!isRunning) {
+    isRunning = true;
+    var hours = parseInt(document.getElementById("hours").value) || 0;
+    var minutes = parseInt(document.getElementById("minutes").value) || 0;
+    var seconds = parseInt(document.getElementById("seconds").value) || 0;
+    remainingTime = (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
+    endTime = Date.now() + remainingTime;
+    timer = setInterval(function() {
+      var now = Date.now();
+      remainingTime = endTime - now;
+      if (remainingTime <= 0) {
+        stopTimer();
+        remainingTime = 0;
+      }
+      updateTimer();
+    }, 10);
+  }
+}
+
+function stopTimer() {
+  if (isRunning) {
+    isRunning = false;
+    clearInterval(timer);
+  }
+}
+
+function resetTimer() {
+  stopTimer();
+  remainingTime = 0;
+ 
+
+</script>
